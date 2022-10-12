@@ -1,4 +1,4 @@
-import { useState } from 'react'; 
+//import { useState } from 'react'; 
  
  
 import useInput from '../hooks/use-input'; 
@@ -14,12 +14,22 @@ const SimpleInput = (props) => {
     reset: resetNameInput 
   } = useInput(value => value.trim() !== ''); 
    
-  const [enteredEmail, setEnteredEmail] = useState(''); 
+  const { 
+    value: enteredEmail, 
+    isValid: enteredEmailIsValid, 
+    hasError: enteredEmailIsInvalid, 
+    valueChangeHandler: emailInputChangeHandler, 
+    inputBlurHandler: emailInputBlurHandler, 
+    reset: resetEmailInput 
+  } = useInput(value => value.trim() !== ''); 
+
+
+  /*const [enteredEmail, setEnteredEmail] = useState(''); 
   const [enteredEmailTouched, setEnteredEmailTouched] = useState(false); 
  
  
   const enteredEmailIsValid = enteredEmail.includes('@'); 
-  const enteredEmailIsInvalid = !enteredEmailIsValid && enteredEmailTouched; 
+  const enteredEmailIsInvalid = !enteredEmailIsValid && enteredEmailTouched; */
  
  
   let formIsValid = false; 
@@ -30,14 +40,14 @@ const SimpleInput = (props) => {
   } 
  
  
-  const emailInputChangeHandler = (event) => { 
+ /* const emailInputChangeHandler = (event) => { 
     setEnteredEmail(event.target.value); 
   }; 
  
  
   const emailInputBlurHandler = (event) => { 
     setEnteredEmailTouched(true); 
-  }; 
+  }; */
  
  
   const formSubmissionHandler = (event) => { 
@@ -54,10 +64,11 @@ const SimpleInput = (props) => {
  
     // nameInputRef.current.value = ''; => NOT IDEAL, DON'T MANIPULATE THE DOM 
     resetNameInput(); 
+    resetEmailInput();
  
  
-    setEnteredEmail(''); 
-    setEnteredEmailTouched(false); 
+    //setEnteredEmail(''); 
+    //setEnteredEmailTouched(false); 
   }; 
  
  
